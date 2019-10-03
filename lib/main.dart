@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sensors/sensors.dart';
 
 void main() => runApp(MyApp());
 
@@ -176,11 +177,14 @@ class AboutPage extends StatelessWidget {
 class TestPage extends StatelessWidget {
 
    @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text('Test')),
-    body:
-    Text('ouch my knee ouch my knee ouch my knee ouch my knee'));
-}
+  void initState() {
+    super.initState();
+    _streamSubscriptions
+        .add(accelerometerEvents.listen((AccelerometerEvent event) {
+      setState(() {
+        _accelerometerValues = <double>[event.x, event.y, event.z];
+      });
+
 }
 
 
